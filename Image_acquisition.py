@@ -34,8 +34,8 @@ while True:
         if cv2.waitKey(0) & 0xFF == ord('s'):  # Push "s" to save the images and "c" if you don't want to
             str_id_image = str(id_image)
             print('Images ' + str_id_image + ' saved for right and left cameras')
-            cv2.imwrite('chessboard-R' + str_id_image + '.png', frameR)  # Save the image in the file where this Programm is located
-            cv2.imwrite('chessboard-L' + str_id_image + '.png', frameL)
+            cv2.imwrite('calibrationR/chessboard-R' + str_id_image + '.png', frameR)  # Save the image in the file where this Programm is located
+            cv2.imwrite('calibrationL/chessboard-L' + str_id_image + '.png', frameL)
             id_image += 1
             cv2.destroyWindow('VideoR')
             cv2.destroyWindow('VideoL')
