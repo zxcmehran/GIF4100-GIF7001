@@ -1,38 +1,30 @@
-# A simple code that filters the image using color to get a mask
-# Detects blobs of the desired color
+# Detects blobs of the desired color using background subtractor
 # Finds the most dominant one
 # determines the center coordinates
 #
 # The calibration is not applied to the images.
-# The algorithm does not necessarily find the brightest spot of the laser dot.
-# Check image 7-Right. Maybe an adjustment on mask color ranges helps.
+# The first two pictures fail to detect the laser.
+# This can be fixed by including the first picture from the scene without laser pointer.
 
-import sys
 import imutils
 import numpy as np
 import cv2
 
-
 imgDirL = 'scanL/'
 imgDirR = 'scanR/'
-colorForMask = 'red'
 
 isDebug = True
 background = cv2.createBackgroundSubtractorMOG2()
 
-def getPointCoordinates(img, color):
-
+def getPointCoordinates(img):
 
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     _, th1 = cv2.threshold(imgHSV, 240, 255, cv2.THRESH_BINARY)
     mask = background.apply(th1)
 
-
-    # Filter reflections from door handle
-
-
     if isDebug:
-        cv2.imshow('not_cleaned_mask', mask)
+        cv2.imshow('th', th1)
+        cv2.imshow('mask', mask)
 
 
     cnts = cv2.findContours(mask, cv2.RETR_EXTERNAL,
@@ -62,18 +54,6 @@ def getPointCoordinates(img, color):
     # return centroids
 
 
-# Implement green or other colors if needed
-def getRedMask(imgHSV):
-    # Mask 1 H:0-10
-    mask0 = cv2.inRange(imgHSV, np.array([0, 50, 50]), np.array([10, 255, 255]))
-
-    # Mask 2 H:170-180
-    mask1 = cv2.inRange(imgHSV, np.array([170, 50, 50]), np.array([180, 255, 255]))
-
-    return mask0 + mask1
-
-
-
 print('Finding Red dot coordinates for 2 cameras... ')
 # Call all saved images
 for i in range(0, 77):
@@ -81,7 +61,7 @@ for i in range(0, 77):
     ChessImaR = cv2.imread(imgDirR+'scan-R'+t+'.png')    # Right side
     ChessImaL = cv2.imread(imgDirL+'scan-L'+t+'.png')    # Left side
 
-    centroidsR = getPointCoordinates(ChessImaR, colorForMask)
+    centroidsR = getPointCoordinates(ChessImaR)
     print(t+' Right')
 
     for itemF in centroidsR:
@@ -93,7 +73,7 @@ for i in range(0, 77):
 
     cv2.waitKey(0)
 
-    centroidsL = getPointCoordinates(ChessImaL, colorForMask)
+    centroidsL = getPointCoordinates(ChessImaL)
     print(t + ' Left')
 
     for itemF in centroidsL:
