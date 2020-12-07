@@ -84,7 +84,7 @@ def calibration(isDebug = False):
 
         cv2.waitKey(0)
 
-    return [LStereoMapX, LStereoMapY, RStereoMapX, RStereoMapY, newcameramtxR, newcameramtxL]
+    return [LStereoMapX, LStereoMapY, RStereoMapX, RStereoMapY, newcameramtxR, newcameramtxL, R, T]
 
     # test to see if it works
     # ChessImaR2 = cv2.imread('chessboard-R66.png', 0)    # Right side
