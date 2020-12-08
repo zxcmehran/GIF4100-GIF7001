@@ -20,8 +20,8 @@ R = a[6]
 T = a[7]
 #mouvement_matrix = np.array([[R[0,0],R[0,1],R[0,2],T[0,0]],[R[1,0],R[1,1],R[1,2],T[1,0]],[R[2,0],R[2,1],R[2,2],T[2,0]]])
 #empty_matrix = np.array([[1,0,0,0],[0,1,0,0],[0,0,1,0]])
-#stereoR = np.matmul(stereoR, mouvement_matrix)
-#stereoL = np.matmul(stereoL, empty_matrix)
+#stereoR = np.matmul(stereoR, empty_matrix)
+#stereoL = np.matmul(stereoL, mouvement_matrix)
 Point_3d = []
 for i in range(0, len(points_L)):
     D_points = cv2.triangulatePoints(stereoL,stereoR,points_L[i],points_R[i])

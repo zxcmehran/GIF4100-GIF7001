@@ -15,7 +15,8 @@ def calibration(isDebug = False):
 
     # Prepare object points
     objp = np.zeros((9*6, 3), np.float32)
-    objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2)
+    #objp[:, :2] = np.mgrid[0:9, 0:6].T.reshape(-1, 2)
+    objp[:,:2] = np.mgrid[0:9,0:6].T.reshape(-1,2)*26
 
     # Arrays to store object points and image points from all images
     objpoints = []   # 3d points in real world space

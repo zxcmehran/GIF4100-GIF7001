@@ -68,8 +68,8 @@ def localisation(LStereoMapX, LStereoMapY, RStereoMapX, RStereoMapY, isDebug = F
         ChessImaR = cv2.imread(imgDirR+'scan-R'+t+'.png')    # Right side
         ChessImaL = cv2.imread(imgDirL+'scan-L'+t+'.png')    # Left side
 
-        #ChessImaR = cv2.remap(ChessImaR, RStereoMapX, RStereoMapY, cv2.INTER_LINEAR, cv2.BORDER_CONSTANT)
-        #ChessImaL = cv2.remap(ChessImaL, LStereoMapX, LStereoMapY, cv2.INTER_LINEAR, cv2.BORDER_CONSTANT)
+        ChessImaR = cv2.remap(ChessImaR, RStereoMapX, RStereoMapY, cv2.INTER_LINEAR, cv2.BORDER_CONSTANT)
+        ChessImaL = cv2.remap(ChessImaL, LStereoMapX, LStereoMapY, cv2.INTER_LINEAR, cv2.BORDER_CONSTANT)
 
 
         centroidsR = getPointCoordinates(ChessImaR, background, False)
@@ -79,7 +79,7 @@ def localisation(LStereoMapX, LStereoMapY, RStereoMapX, RStereoMapY, isDebug = F
             item = itemF.astype(int)
             cv2.drawMarker(ChessImaR, (item[0], item[1]), (0, 0, 255), markerType=cv2.MARKER_STAR,
                            markerSize=40, thickness=2, line_type=cv2.LINE_AA)
-            pointsR.append([item[0],item[1]])
+            pointsR.append(np.array([[item[0]],[item[1]]],dtype=np.float))
 
         if isDebug:
             cv2.imshow('Detection', ChessImaR)
@@ -93,7 +93,7 @@ def localisation(LStereoMapX, LStereoMapY, RStereoMapX, RStereoMapY, isDebug = F
             item = itemF.astype(int)
             cv2.drawMarker(ChessImaL, (item[0], item[1]), (0, 0, 255), markerType=cv2.MARKER_STAR,
                            markerSize=40, thickness=2, line_type=cv2.LINE_AA)
-            pointsL.append([item[0],item[1]])
+            pointsL.append(np.array([[item[0]],[item[1]]],dtype=np.float))
 
         if isDebug:
             cv2.imshow('Detection', ChessImaL)
