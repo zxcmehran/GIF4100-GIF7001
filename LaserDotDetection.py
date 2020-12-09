@@ -1,10 +1,7 @@
 # Detects blobs of the desired color using background subtractor
 # Finds the most dominant one
 # determines the center coordinates
-#
-# The calibration is not applied to the images.
-# The first two pictures fail to detect the laser.
-# This can be fixed by including the first picture from the scene without laser pointer.
+# the first picture should be the scene without laser pointer.
 
 import imutils
 import numpy as np

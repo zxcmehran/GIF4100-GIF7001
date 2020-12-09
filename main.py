@@ -1,6 +1,6 @@
 from matplotlib import cm
 import Calibration
-import LaserDotDetectionV2
+import LaserDotDetection
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,7 +10,7 @@ rejected = 0
 
 a = Calibration.calibration(False)
 
-b = LaserDotDetectionV2.localisation(a[0], a[1], a[2], a[3], False)
+b = LaserDotDetection.localisation(a[0], a[1], a[2], a[3], False)
 
 points_L = np.array(b[0])  # cv2.UMat(b[0])
 points_R = np.array(b[1])  # cv2.UMat(b[1])
