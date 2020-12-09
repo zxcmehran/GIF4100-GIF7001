@@ -1,3 +1,4 @@
+from matplotlib import cm
 import Calibration
 import LaserDotDetectionV2
 import cv2
@@ -33,7 +34,7 @@ print("Press (q) to quit")
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 point_numpy = np.array(Point_3d)
-ax.scatter(point_numpy[:, 0], point_numpy[:, 1], point_numpy[:, 2])
+ax.plot_trisurf(point_numpy[:, 0], point_numpy[:, 1], point_numpy[:, 2], cmap=cm.copper.reversed(), linewidth=0.1)
 plt.show()
 
 if cv2.waitKey(1) & 0xff == ord('q'):
