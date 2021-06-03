@@ -6,4 +6,5 @@ The **main.py** file calls the calibration and laser dot detection functions. Gi
 Additionally, the files **CalibrationAcquisition.py** and **LaserAcquisition.py** can be used to capture calibration and laser scan image sets respectively.
 
 Image sets contain multiple shots of a checkerboard calibration target, and a set of images having a red laser pointer scanning through the scene. Please note to re-adjust the details in **Calibration.py** file if you are going to use another calibration target. After calibrating the cameras and detecting the laser points, a triangulation is done to reconstruct the scene.
-   
+
+You can check out the [detailed report of the project](http://static.ahadi.me/projects/3d-reconstruction/GIF-7001_3dReconstruction_project.pdf) and the video on the [operation of image acquisition system](https://www.youtube.com/watch?v=inGc7fOuR84).
